@@ -5,8 +5,8 @@ module FinalProject(
 	 input CLK, //machine clock (50MHz)
     input reset, //reset button
 	 input [7:0] instruction, //instruction input
-	 output [7:0] seg1, 
-	 output [7:0] seg2, //hex segments
+	 output [6:0] seg1, 
+	 output [6:0] seg2, //hex segments
 	 output [7:0] readingAddress //instruction address output
 	 );
 	 
@@ -14,13 +14,13 @@ module FinalProject(
 	 reg [7:0] regWrite; //regWrite
 	 reg [7:0] pc; //pc value
 	 assign readingAddress = pc; 
-	 reg [31:0] data[7:0]; //data memory
-	 reg [3:0] registers[7:0]; //4 registers
-	 reg [4:0] counting;
+	 reg [7:0] data[31:0]; //data memory
+	 reg [7:0] registers[3:0]; //4 registers
+	 reg [5:0] counting;
 	 
-	 FrequencyDivider freqdiv (.CLKin(CLK), .clr(1'b0), .clkout(contCLK));
-	 HextoBCD HBCD1 (.bcd(regWrite[7:4]), .seg(seg1));
-	 HextoBCD HBCD2 (.bcd(regWrite[3:0]), .seg(seg2));
+	 FrequencyDivider freqdiv (.CLKin(CLK), .clr(1'b0), .CLKout(contCLK));
+	 HextoBCD HBCD1 (.bcd(regWrite[7:4]), .segout(seg1));
+	 HextoBCD HBCD2 (.bcd(regWrite[3:0]), .segout(seg2));
 	 
 	 initial begin
 		pc = 8'b00000000;
@@ -31,7 +31,8 @@ module FinalProject(
 	 	 
 	 
 	 always @(posedge reset or posedge contCLK) begin
-		if(reset == 1'b0) begin //reset
+		if(reset == 1'b1) begin //reset
+			pc = 8'b00000000;
 			for(counting = 0; counting < 32; counting = counting + 1) begin
 				data[counting] = counting[3:0];
 			end

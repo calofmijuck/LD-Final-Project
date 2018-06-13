@@ -20,8 +20,10 @@
 //////////////////////////////////////////////////////////////////////////////////
 module HextoBCD(
     input [3:0] bcd,
-    output [7:0] seg
+    output [6:0] segout
     );
+	 reg [6:0] seg;
+	 assign segout = seg;
 	 
 	 always @(bcd) begin
 		case(bcd)

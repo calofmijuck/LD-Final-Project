@@ -21,18 +21,18 @@
 module FrequencyDivider(
     input CLKin,
     input clr,
-    output clkout
+    output reg CLKout
     );
-	 
+
 	 reg [31:0] cnt;
-	 always @(posedge clkin) begin
+	 always @(posedge CLKin) begin
 		if(clr) begin
 			cnt <= 32'd0;
-			clkout <= 1'b0;
+			CLKout <= 1'b0;
 		end
 		else if(cnt == 32'd25000000) begin
 			cnt <= 32'd0;
-			clkout <= ~clkout;
+			CLKout <= ~CLKout;
 		end
 		else begin
 			cnt <= cnt+1;
