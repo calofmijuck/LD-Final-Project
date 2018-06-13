@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2018-06-13T18:02:49</DateModified>
+  <DateModified>2018-06-13T18:49:19</DateModified>
   <ModuleName>FinalProject</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
-  <SavedFilePath>/tmp/LDFP/Login-Degisn-Final-Project/FinalProject/iseconfig/FinalProject.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>/tmp/LDFP/Login-Degisn-Final-Project/FinalProject/</ImplementationReportsDirectory>
+  <SavedFilePath>/csehome/calofmijuck/LD-Final-Project/FinalProject/iseconfig/FinalProject.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>/csehome/calofmijuck/LD-Final-Project/FinalProject/</ImplementationReportsDirectory>
   <DateInitialized>2018-06-13T17:49:28</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>
