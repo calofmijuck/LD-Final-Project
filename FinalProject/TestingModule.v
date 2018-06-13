@@ -26,7 +26,7 @@ module TestingModule(
 	 wire [7:0] MemByte[5:0]; //
 	 
 	 // OPERATION TEST SET //
-	 // lw $s1, 0($s0)
+	 // lw $s1, 0($s0)s
 	 assign MemByte[0] = { 2'b01, 2'b00, 2'b01, 2'b00 };
 
 	 // lw $s2, 1($s0)
