@@ -19,18 +19,12 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module FinalProject(
-<<<<<<< HEAD
 	 input CLK,
-    input reset,
+ 	 input reset,
 	 input [7:0] instruction,
 	 output [3:0] seg1,
 	 output [3:0] seg2,
 	 output [7:0] readingAddress
-=======
-    input [7:0] instruction,
-	 input [7:0] pc,
-    input reset
->>>>>>> a44ebc8a260f176a1e748ad6eb1ffb25dbf1059f
 	 );
 	 
 	 wire contCLK;
