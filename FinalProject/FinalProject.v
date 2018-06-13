@@ -1,36 +1,26 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date:    17:49:28 06/13/2018 
-// Design Name: 
-// Module Name:    FinalProject 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
-//
-// Dependencies: 
-//
-// Revision: 
-// Revision 0.01 - File Created
-// Additional Comments: 
-//
-//////////////////////////////////////////////////////////////////////////////////
+
+
 module FinalProject(
-	 input CLK,
- 	 input reset,
-	 input [7:0] instruction,
-	 output [3:0] seg1,
-	 output [3:0] seg2,
-	 output [7:0] readingAddress
+	 input CLK, //machine clock (50MHz)
+    input reset, //reset button
+	 input [7:0] instruction, //instruction input
+	 output [7:0] seg1, 
+	 output [7:0] seg2, //hex segments
+	 output [7:0] readingAddress //instruction address output
 	 );
 	 
-	 wire contCLK;
-	 reg regWrite;
-	 reg [7:0] pc;
-	 assign readingAddress = pc;
+	 wire contCLK; //controlled Clock (1Hz)
+	 reg [7:0] regWrite; //regWrite
+	 reg [7:0] pc; //pc value
+	 assign readingAddress = pc; 
+	 reg [31:0] data[7:0]; //data memory
+	 reg [3:0] registers[7:0]; //4 registers
+	 reg [4:0] counting;
+	 
+	 FrequencyDivider freqdiv (.CLKin(CLK), .clr(1'b0), .clkout(contCLK));
+	 HextoBCD HBCD1 (.bcd(regWrite[7:4]), .seg(seg1));
+	 HextoBCD HBCD2 (.bcd(regWrite[3:0]), .seg(seg2));
 	 
 	 initial begin
 		pc = 8'b00000000;
@@ -38,37 +28,32 @@ module FinalProject(
 			data[counting] = counting[3:0];
 		end
 	 end
-	 
-
-
-	 
-	 frequencyDivider freqdiv (.CLKin(CLK), .clr(1'b0), .clkout(contCLK));
-	 
-	 reg [31:0] data[7:0];
-	 reg [3:0] registers[7:0];
-	 reg [4:0] counting;
+	 	 
 	 
 	 always @(posedge reset or posedge contCLK) begin
-		if(reset == 1'b0) begin
+		if(reset == 1'b0) begin //reset
 			for(counting = 0; counting < 32; counting = counting + 1) begin
 				data[counting] = counting[3:0];
 			end
 		end
+		
 		else begin
 			case(instruction[7:6])
-				2'b00 : begin
+				2'b00 : begin //add
 					registers[instruction[1:0]] = registers[instruction[3:2]] + registers[instruction[5:4]];
+					regWrite = registers[instruction[1:0]];
 					pc = pc + 1;
 				end
-				2'b01 : begin
+				2'b01 : begin //load
 					registers[instruction[3:2]] = data[registers[instruction[5:4]] + instruction[1:0]];
+					regWrite = registers[instruction[3:2]];
 					pc = pc + 1;
 				end
-				2'b10 : begin
+				2'b10 : begin //store
 					data[registers[instruction[5:4]] + instruction[1:0]] = registers[instruction[3:2]];
 					pc = pc + 1;
 				end
-				2'b11 : begin
+				2'b11 : begin //jump
 					case(instruction[1:0])
 						2'b00 : pc = pc + 1;
 						2'b01 : pc = pc + 2;
@@ -79,8 +64,5 @@ module FinalProject(
 			endcase
 		end
 	end 
-	 
-	 
-
 
 endmodule
