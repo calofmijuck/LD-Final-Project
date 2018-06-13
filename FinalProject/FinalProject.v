@@ -20,8 +20,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 module FinalProject(
     input [7:0] instruction,
-	 input [7:0] pc
-    input reset;
+	 input [7:0] pc,
+    input reset
 	 );
 	 
 	 reg [31:0] data[3:0];
