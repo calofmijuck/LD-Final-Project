@@ -28,7 +28,7 @@ module FinalProject(
 	 reg [7:0] display = 8'b00000000;
 	 wire [4:0] showButton;
 	 assign showButton = {showReg0, showReg1, showReg2, showReg3, showPC};
-	 FrequencyDivider freqdiv (.CLKin(CLK), .clr(1'b0), .CLKout(contCLK));
+	 FrequencyDivider freqdiv (.CLKin(CLK), .clr(reset), .CLKout(contCLK));
 	 HextoBCD HBCD1 (.bcd(regWrite[7:4]), .segout(seg1));
 	 HextoBCD HBCD2 (.bcd(regWrite[3:0]), .segout(seg2));
 	 HextoBCD HBCD3 (.bcd(display[7:4]), .segout(seg3));
