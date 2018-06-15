@@ -1,23 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date:    18:28:47 06/13/2018 
-// Design Name: 
-// Module Name:    HextoBCD 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
-//
-// Dependencies: 
-//
-// Revision: 
-// Revision 0.01 - File Created
-// Additional Comments: 
-//
-//////////////////////////////////////////////////////////////////////////////////
 module HextoBCD(
     input [3:0] bcd,
     output [6:0] segout
@@ -45,5 +26,4 @@ module HextoBCD(
 			4'b1111: seg = 7'b1110001;
 		endcase
 	end	
-
 endmodule
