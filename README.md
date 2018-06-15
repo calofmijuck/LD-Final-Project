@@ -1,4 +1,4 @@
-# Login-Degisn-Final-Project
+# Login Degisn Final Project
 2018 Spring Logic Design Final Project
 
 Microprocessor Design
